@@ -1,180 +1,261 @@
-## some keywords to know
+# Linux Essentials
 
-### ports: connection point
+**Linux is a family of open-source, Unix-like operating systems built on the Linux kernel, created by Linus Torvalds in 1991**. It is known for its stability, security, and versatility, powering everything from servers and supercomputers to smartphones and embedded devices. Unlike other operating systems, its open-source nature means users can view, modify, and distribute the source code freely.
 
-### Physical ports:
+## 1. Linux Architecture
 
-USB, Ethernet, HDMI, Displayport which are used to connect various devices
+Here, I showed the simple architecture of linux system.
 
-### virtual ports:
+![unnamed.jpg](attachment:e557a823-7219-4029-acab-90f97927da59:unnamed.jpg)
 
-0-65535 port number. each is associated with specific services or protocols. data are transfered with it
+### Hardware
 
-21-FTP, 22-SSH, 23-Telnet,  25-SMTP,  53-DNS,  80-HTTP,  443-HTTPs,  3306-MySQL,  3389-RDP,  5432-PostgreSQL
+The Hardware is the physical stuff you can actually touch. This includes the computer's brain, which is the CPU, the short-term memory called RAM, and the storage devices like hard drives. It also includes things you use to interact with the computer, like your keyboard and printer. Essentially, the hardware is the basic physical equipment that makes the entire system function.
 
-### Vulnerability:
+### Kernel
 
-security weakness that are exploited by hackers
+The Kernel is the most important program in Linux, acting as the heart of the operating system. It is the manager or traffic cop that sits directly between the software and the hardware. Its main job is to manage resources: it decides which programs get to use the CPU and for how long (this is called process scheduling), it makes sure programs have enough memory, and it handles all the requests that go to the hardware. The Kernel's goal is to make sure all programs run smoothly and don't interfere with each other.
 
-### CVE(Common Vulnerabilities and Explosures):
+### Shell
 
-public directory that identifies known security vuln and exposures
+The Shell is the way you, the user, talk to the Kernel. It is often a command line where you type in text commands like ‘ls’ to list files, but it can also be a graphical screen, like the desktop interface you click on. The Shell’s job is crucial: it takes your commands (such as "open a file" or "start this app") and translates them into a precise language that the Kernel can understand and then execute. Accessing Shell can be used to control a computer by hacker.
 
-### CVSS(Common Vulnerability scoring System):
+### System Utilities
 
-used to measure the severity of vuln
+The System Utilities are a collection of useful programs and tools that help you perform tasks on the computer. These are the helper apps, and they include programs for copying and managing files, tools for setting up the internet connection, and the software you use to install new applications. These utilities take your requests from the Shell and prepare them, acting as a bridge before the Kernel executes the final action.
 
-### Exploit:
+### Linux Distribution
 
-code or techique that enable the malicious use of vuln
+Linux is not just one operating system. It is a group of open-source operating systems that are all based on the Linux kernel. These different versions are called "distributions". Each distro gives a different version of Linux made for different users, devices, or needs. This part explains what Linux distributions are, why they are important, and gives examples of popular ones. A Linux distribution is a complete operating system built around the Linux kernel. It includes the kernel, a wide array of software applications, libraries, and optionally a graphical user interface (GUI). Some examples of popular distros are Ubuntu, Fedora, CentOS, Kali Linux, Debian, Arch Linux.
 
-### Zero Day:
+## 2. Linux File System:
 
-vuln that are not yet patched and unknown to public and developers
+The Linux file system is hierarchically organized, starting with the root directory ‘/’. All the directories of the system is located under this root directory
 
-### shell:
+```jsx
+/: The root directory, the base of the file system.
 
-command line interface to use the service of a system. gaining it allow hacker to execute command on terget
+/bin, /sbin: Contains essential user and system binaries.
 
-### bind shell:
+/etc: Contains system configuration files.
 
-A type of shell where the attacker opens a port on the target machine and connects to it to execute commands.
+/home: Contains personal directories for users.
 
-### reverse shell:
+/var: Contains variable files like logs and databases.
 
-A type of shell where the target machine connects back to the attacker's machine (attacker listening port), allowing the execution of commands.
+/usr: Secondary hierarchy for user data; contains most user programs and utilities.
+```
 
-### web shell:
+## 3. Linux command line
 
-A type of shell that includes a malicious script running on a web server, giving the attacker remote command execution capabilities.
+Command line is used to control your computer by typing text commands instead of using a mouse or clicking icons. It is a powerful way to work with Linux because you can do almost everything like managing files, running programs, and changing system settings just by typing commands.
 
-### IPv4:
+Terminal: The terminal is the program window that you open to type commands. It is just the tool that lets you interact with the system through text.
 
-32-bit addressing system and provides approximately 4.3 billion unique addresses.
+Command Line:  The command line is the place inside the terminal where you type your commands. It’s the text interface you see.
 
-### IPv6:
+Shell: The shell is the program that reads and runs the commands you type on the command line. For example, Bash is the most common shell in Linux.
 
-Developed due to the insufficient addressing capacity of IPv4, it uses a 128-bit addressing system.
+Bash (Bourne Again Shell): It is the most common program used in the Linux terminal. It reads the commands you type and tells the system what to do. Bash is called a “shell” because it acts as a layer between the user and the Linux system.
 
-# Linux essentials:
+## 4. Navigation in linux
 
-## finding files
+let’s start with the practical part. first, let’s see some simple navigations using linux shell
+
+```jsx
+//displaying pressent working directory
+$ pwd
+/home/sam
+
+//listing the directories and files
+$ ls
+Desktop  Documents  Downloads  Music  Pictures  Videos  notes.txt
+
+//see details of each file and directories such as permissions, ownership, and modification times.
+$ ls -l
+total 8
+drwxr-xr-x 2 user users 4096 Jul 29 08:24 Desktop
+drwxr-xr-x 2 user users 4096 Jul 29 08:24 Documents
+drwxr-xr-x 2 user users 4096 Jul 29 08:24 Downloads
+drwxr-xr-x 2 user users 4096 Jul 29 08:24 Pictures
+drwxr-xr-x 2 user users 4096 Jul 29 08:24 Videos
+
+//see the hidden files using -a
+$ ls -a
+Desktop  Documents  Downloads  Music  Pictures  Videos  notes.txt  .bashrc
+//files that start with dot(.) are mainly hidden
+
+$ ls -la
+total 12
+drwxr-xr-x 3 user user 4096 Aug  1 10:00 .
+drwxr-xr-x 4 user user 4096 Aug  1 09:58 ..
+drwxr-xr-x 2 user users 4096 Jul 29 08:24 Desktop
+drwxr-xr-x 2 user users 4096 Jul 29 08:24 Documents
+drwxr-xr-x 2 user users 4096 Jul 29 08:24 Downloads
+drwxr-xr-x 2 user users 4096 Jul 29 08:24 Pictures
+drwxr-xr-x 2 user users 4096 Jul 29 08:24 Videos
+rwxr--rw- 2 sam hackers 4096 Jul  29 12:34 notes.txt
+-rw---X---- 1 user users  220 Jul 29 09:58 .bashrc
+
+//listing files of other directories
+$ ls -l /var/log
+total 20445
+drwxr-x--- 2 root root	4096 Aug  1 06:25 apache2
+
+//changing directory
+$ cd /temp
+```
+
+## 5. Finding files
 
 ```jsx
 //finding by name under directory
-find / -name "notes.txt"
+$ find / -name "notes.txt"
 
 //Search by Type: Use the -type option to search by file type (regular files f, directories d)
-find /home/user -type d -name "Project*"
+$ find /home/user -type d -name "Project*"
 
 //finding by file size
-find / -size +50M
+$ find / -size +50M
 
 //Search by Modification Time: Use -mtime, -atime, or -ctime
-find / -mtime -7
+$ find / -mtime -7
 
 //Searching with the locate and which Command
-updatedb
-locate notes.txt
-which python
+$ updatedb
+$ locate notes.txt
+$ which python
 ```
 
-## filtering
+## 6. Filtering data from a file
 
 ```jsx
-head -n 3 /var/log/apache2/access.log
-tail -n 3 /var/log/auth.log
+//filtering out first 10 lines from access.log file
+$ head -n 10 /var/log/apache2/access.log
 
-$ cat names.txt
-Bob
-Alice
-Charlie
-Alice
+//filtering out last 10 lines from access.log file
+$ tail -n 10 /var/log/apache2/access.log
 
-$ sort names.txt
-Alice
-Alice
-Bob
-Charlie
+//let's play with employees.txt file
+$ cat employees.txt
+bobby
+Alex
+Charls
+Alex
 
-$ sort names.txt | uniq
-Alice
-Bob
-Charlie
+//sorting the names alphabetically
+$ sort employees.txt
+Alex
+Alex
+Bobby
+Charls
 
-//grep and wc
-grep '192.168.1.1' /var/log/apache2/access.log
-wc /etc/passwd
--l: Displays only the number of lines.
--w: Displays only the number of words.
--c: Displays only the number of bytes.
--m: Displays only the number of characters (useful for multi-byte character sets).
+//sorting with getting just unique names
+$ sort employees.txt | uniq
+Alex
+Bobby
+Charls
 
-//awk command i know
+//using "grep" to filterout the lines of specific things
+$ grep '192.168.1.1' /var/log/apache2/access.log
+
+//using "awk command to filterout from 2 or more columns
+
+//displaying the lines, words and characters of any file
+$ wc -l /etc/passwd
+23
+// -l: Displays only the number of lines.
+// -w: Displays only the number of words.
+// -c: Displays only the number of bytes.
+// -m: Displays only the number of characters (useful for multi-byte character sets)
+
 ```
 
-## package management
+## 7. package management
 
-package managers to facilitate tasks such as software installation, updating, and removal, dependency resolution, update, upgrade, configuration
+package managers are used for tasks such as software installation, updating, removal, dependency resolution, update, upgrade, configuration. The most used package manager is apt which is debian based.
 
 ```jsx
 //searching in package list
-sudo apt search htop
-//to search a package starting with htop
-sudo apt search ^htop
-//search for package whose name contains htop
-sudo apt search --names-only htop
-//installing, upgrading, updating, remove i know
-//The remove command does not delete the configuration files and deb files for htop. To remove those as well, you would use the purge command.
-sudo apt purge htop
+$ sudo apt search htop
+
+//searching a package starting with htop
+$ sudo apt search ^htop
+
+//searching for package whose name contains htop
+$ sudo apt search --names-only htop
+
+//installing package
+$ sudo apt install sqlmap nmap curl git
+
+//Reinstalling a package if something is broken
+$ sudo apt install --reinstall nmap
+
+//displaying installed packages
+$ sudo apt list --installed
+
+//updating the package list
+$ sudo apt update
+
+//Upgrading all installed packages to the newest versions available
+$ sudo apt upgrade //does not remove old packages or install new dependencies that weren’t already installed.
+$ sudo apt full-upgrade //can add/remove packages as needed to fulfill dependencies.
+
+//update/upgrade specific software
+$ sudo apt update/upgrade sqlmap
+
+//Removing a package but leaves its configuration files in place
+$ sudo apt remove nmap //Useful if reinstall later and want to keep custom configs safe
+
+//Removing all the things of a software
+$ sudo apt purge nmap
+
+//Removing old unnecessary dependencies
+$ sudo apt autoremove
+$ sudo apt autoclean
 ```
 
-## user management
+## 8. User management
 
-create, manage, and delete users in Linux
+By learning user management we will be able to create, manage, and delete users in Linux system. In Linux systems, users are defined as individuals or entities performing various tasks by logging into the system. User management is needed for controlling access, resource allocation, and system administration tasks
 
-In Linux systems, users are defined as individuals or entities performing various tasks by logging into the system. User management is crucial for controlled access, resource allocation, and overall system administration.
-
-a user is associated with a user account that has several attributes defining their identity and privileges within the system. These attributes include the username, UID (User ID), GID (Group ID), home directory, default shell, and password.
+a user is associated with a user account. It has several components defining their identity and privileges within the system. These components are username, UID (User ID), GID (Group ID), home directory, default shell, and password.
 
 ### Types of User
 
-Linux supports two types of users: system users and regular users.
+Linux supports two types of users:
 
-**System users** are created by the system during installation and are used to run system services and applications.
-
-**Regular users** are created by an administrator and can access the system and resources based on their permissions.
+1. **System users:** created by the system during installation and are used to run system services and applications.
+2. **Regular users:** created by an administrator and can access the system and resources based on their permissions.
 
 ```jsx
-//creating a user 
-//-u (uid), -d (directory), -s (default shell)
-useradd -u 1002 -d /home/john -s /bin/bash john
+//creating a user name "sam"
+$ sudo useradd -u 1002 -d /home/sam -s /bin/bash sam //-u (uid), -d (directory), -s (default shell)
 
-//check or verify the user
-$ id john
-uid=1002(john) gid=1002(john) groups=1002(john)
-//(gid = group id)
+//checking the user
+$ id sam
+uid=1002(sam) gid=1002(sam) groups=1002(sam) //(gid = group id)
 
 //registered users are stored in the /etc/passwd file
 $cat /etc/passwd
 root:x:0:0:System Administrator:/root:/bin/bash
-john:x:1002:1002:John Doe:/home/johndoe:/bin/bash
+sam:x:1002:1002:Sam Duke:/home/samduke:/bin/bash
 // x = password. it is stored in /etc/shadow. so that filed is replaced by x
 
 //changing user password
-sudo passwd john
+$ sudo passwd sam
 
-//remove a user named John and their associated files
-sudo userdel john
+//remove a user named 'sam' and their associated files
+$ sudo userdel sam
 ```
 
-## Group management
+## 9. Group management
 
 Groups are used to collectively assign the same access rights and permissions to multiple users. This enables system administrators to easily control resources and access
 
 ```jsx
-//creating a group
-sudo groupadd development
+//creating a group named "hackers"
+$ sudo groupadd hackers
 
 //see group info
 $ cat /etc/group
@@ -186,84 +267,93 @@ adm:x:4:
 tty:x:5:
 disk:x:6:
 ...
+hackers:x:1004:
+
+//checking the group
+$ cat /etc/group | grep hackers
 development:x:1004:
 
-$ cat /etc/group | grep development
-development:x:1004:
+//adding a user named 'sam' in the group 'hackers'
+$ sudo usermod -aG hackers sam
 
-//adding a user in a group
-sudo usermod -aG development john
-
-//deleting a group
-sudo groupdel development
+//deleting the group
+$ sudo groupdel hackers
 ```
 
-## Permissions
+## 10. Permission management
 
-when different users share the same system, privacy issues can easily arise. For instance, one user may not want others to view, edit, or delete their files.
+when different users share the same system, then maintaining privacy is so important. One user don’t  want others to view, edit, or delete their files. So, we have to manage permissions for our files.
+
+Permission type:
+
+user permissions: concern only the owner of the file or directory.
+
+Group permissions: concern only the users who belong to the group assigned to the file or directory.
+
+Other permissions: concern all other users and groups on the system.
 
 ```jsx
-//see permission
+//see permission of files in a directory
 $ ls -l
-drwxr--r-- 2 john development 4096 Jul  29 12:34 notes.txt
+drwxr--r-- 2 sam hackers 4096 Jul  29 12:34 notes.txt
 // -d (represent directory), rwxr--r-- (file permission)
-```
 
-- user - User permissions concern only the owner of the file or directory.
-- group - Group permissions concern only the users who belong to the group assigned to the file or directory.
-- others - Other permissions concern all other users and groups on the system.
-
-```jsx
-rwx         r--     r--
-user         group    others
-// Members of the development group, to which the file is assigned, have only read permission for this file.
+//breaking the drwxr--r--
+rwx                      r--                r--
+user_permission         group_permission   others
+// Members of the hackers group, to which the file is assigned, have only read permission for this file.
 
 //using chmod for changing permissions
+$ sudo chmod u+w notes.txt //I permitted others the write permission to notes.txt
 // u (user) - Owner user permissions
 // g (group) - Group permissions
 // o (others) - Other permissions
-chmod o+w notes.txt
-//giving others write permission
 
 $ ls -l
-drwxr--rw- 2 john development 4096 Jul  29 12:34 notes.txt
+drwxr--rw- 2 sam hackers 4096 Jul  29 12:34 notes.txt
+// r = read, w = write, x = execute
 
 //giving all permission to both user, group and others
 $ chmod ugo+rwx notes.txt
-$ ls -l
-drwxrwxrwx 2 john development 4096 Jul  29 12:34 notes.txt
+$ ls -l notes.txt
+drwxrwxrwx 2 sam hackers 4096 Jul  29 12:34 notes.txt
 ```
 
-## Process Management
+## 11. Process Management
 
-process" is defined as a program loaded into memory and executing in the processor (CPU)
+process can be defined as a program loaded into memory and executing in the processor (CPU)
 
-### Types of processes
+There are two types of processes
 
-Foreground process: 
+1. Foreground process: 
 
-By default, all processes run in the foreground. They take input from the keyboard and display output on the screen. Running the pwd command is a good example of a foreground process.
-
-Background process: 
-
-To run a command in the background, append the & character to it. For example, let's run the pwd command in the background
+By default, all processes run in the foreground. They take input from the keyboard and display output on the screen. Running the ping command and see the process
 
 ```jsx
-pwd &
-[1]   +   Done                 pwd
+//foreground process
+$ pwd
+/home/sam
+
+$ ping 127.0.0.1
+64 bytes from 127.0.0.1: icmp_seq=100 ttl=64 time=0.081 ms
+64 bytes from 127.0.0.1: icmp_seq=101 ttl=64 time=0.164 ms
+64 bytes from 127.0.0.1: icmp_seq=102 ttl=64 time=0.075 ms
+
 ```
 
-pwd command, by nature, completes its task immediately and exits. However, some commands run continuously until you send a stop signal. The ping command is a good example of this.
+1. Background process: 
 
-Let's send a ping to
+To run a command in the background, append the ‘&’ character to it. For example, run the pwd command in the backgroundSome commands run continuously until you send a signal. We can see it for ping command
 
-127.0.0.1 with the ping command and run it in the background. This will allow us to send ping requests to 127.0.0.1 for as long as our terminal or the running process remains open, while still allowing us to use our terminal for other tasks.
+We will ping 127.0.0.1 loopback address and run it in the background. This will allow us to send ping requests to 127.0.0.1 for as long as our terminal or the running process remains open, while still allowing us to use our terminal for other tasks.
 
 ```jsx
+// using & for running process in the background
 $ ping 127.0.0.1 &
 [1] 54017
 //[1] indicated the job number 1
 
+//using $ sign we can see it
 $
 64 bytes from 127.0.0.1: icmp_seq=100 ttl=64 time=0.081 ms
 64 bytes from 127.0.0.1: icmp_seq=101 ttl=64 time=0.164 ms
@@ -277,6 +367,7 @@ $ jobs
 To bring this background command back to the foreground, we can use the fg (foreground) command. We type the job number of the process with a % sign next to the fg command.
 
 ```jsx
+// displaying job 1 in the foreground
 $ fg %1
 [1]  - running    ping 127.0.0.1
 64 bytes from 127.0.0.1: icmp_seq=645 ttl=64 time=1.448 ms
@@ -287,7 +378,7 @@ $ fg %1
 
 ### managing system-wide process
 
-processes used by the operating system, the terminal, service providers, or programs that continuously run in the background.
+System-wide processes used by the operating system, the terminal, service providers, or programs that continuously run in the background.
 
 ```jsx
 //view system-wide process
@@ -311,21 +402,21 @@ PID       TTY      TIME        CMD
 
 ```jsx
 //kill a process
-kill <pid>
-kill 19
+$ kill <pid>
+$ kill 19
 
 // if not work, forcefully stop it with -9
-kill -9 19
+$ kill -9 19
 ```
 
-## Network Management
+## 12. Network Management
 
-## Network interface configuration
+### Network Interface Configuration
 
 Ifconfig tool is used to perform various network configuration tasks such as assigning IP addresses, setting netmasks, and activating or deactivating network interfaces.
 
 ```jsx
-//list available network devices
+//listing available network devices
 $ ifconfig
 
 eth0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
@@ -348,48 +439,48 @@ lo: flags=73<UP,LOOPBACK,RUNNING>  mtu 65536
         TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
 ```
 
+Here, 
+
 eth0: This is the Ethernet card interface. The UP flag indicates it is active. The IP address is 172.20.1.109. The MAC address is 52:54:00:10:72:c3.
 
 lo: Loopback interface. It is a virtual interface created to allow local networking, pointing to the 127.0.0.1 IP address.
 
 ```jsx
-//view specific network interface
-ifconfig eth0
+//view specific network interface eth0
+$ ifconfig eth0
 
-//view interfaces that are DOWN (i.e., inactive), use the -a parameter.
-ifconfig -a
+//view interfaces that are DOWN or inactive by using the -a parameter.
+$ ifconfig -a
 
-//activating and deactivation specific interface eth0
-ifconfig eth0 up
-ifconfig eth0 down
+//activating specific interface eth0
+$ ifconfig eth0 up
 
-//assigning ip address to an interface or change the existing ip
-ifconfig eth0 172.20.1.110
+//deactivation specific interface eth0
+$ ifconfig eth0 down
+
+//assigning ip address to an interface or changeing the existing ip
+$ ifconfig eth0 173.20.1.20
 
 //assigning a netmask
-ifconfig eth0 netmask 255.255.255.0 
-```
+$ ifconfig eth0 netmask 255.255.255.0 
 
-### Promiscuous mode:
+//changing mac address
+$ ifconfig eth0 hw ether AA:BB:CC:DD:EE:FF
 
-হলো একটি বিশেষ সেটিংস যা একটি **ইথারনেট কার্ড** বা নেটওয়ার্ক ইন্টারফেস কন্ট্রোলার (NIC)-কে তার স্বাভাবিক কার্যকারিতার বাইরে কাজ করতে দেয়।
-
-- **স্বাভাবিক অবস্থায়:** একটি ইথারনেট কার্ড সাধারণত শুধুমাত্র সেই ডেটা প্যাকেটগুলোই গ্রহণ ও প্রক্রিয়া করে যেগুলোর **গন্তব্যের ম্যাক অ্যাড্রেস** (MAC Address) তার নিজের সাথে মিলে যায়, অথবা যেগুলো **ব্রডকাস্ট** (নেটওয়ার্কের সবার জন্য) করা হয়েছে। অন্য ডিভাইসের জন্য পাঠানো প্যাকেটগুলো এটি উপেক্ষা করে।
-- **প্রমিস্কিউয়াস মোডে:** যখন এই মোড চালু করা হয়, তখন কার্ডটি **নেটওয়ার্ক ক্যাবলের** মধ্য দিয়ে আসা **সমস্ত** ডেটা প্যাকেট গ্রহণ করতে শুরু করে, সেগুলোর গন্তব্য অ্যাড্রেস যা-ই হোক না কেন—এমনকি সেগুলো যদি **অন্য কোনো ডিভাইসের** জন্য পাঠানো হয়ে থাকে। used for packet monitoring from various devices
-
-```jsx
 //enabling promiscuous mode
-ifconfig eth0 promisc
+$ ifconfig eth0 promisc
 
 //disabling promiscuous mode
-ifconfig eth0 -promisc
+$ ifconfig eth0 -promisc
 ```
 
-### changing mac address
+note: 
 
-```jsx
-ifconfig eth0 hw ether AA:BB:CC:DD:EE:FF
-```
+Promiscuous mode is a special setting that allows an Ethernet card or network interface controller (NIC) to work beyond its normal function.
+
+Normally, an Ethernet card only receives and processes data packets that are meant for its own MAC address, or ones that are broadcast (sent to everyone on the network). It ignores packets meant for other devices.
+
+In promiscuous mode, when this mode is turned on, the card starts receiving all data packets passing through the network cable, no matter who the packets are for, even if they are meant for other devices. It is used for monitoring packets from different devices on the network.
 
 ### DNS settings
 
@@ -400,7 +491,7 @@ In Linux, DNS settings are located in the /etc/resolv.conf file.
 $ nano /etc/resolv.conf
 nameserver 172.20.1.1
 
-//file content is like
+//present file content is like
 nameserver 172.20.1.1
 
 //adding new dns server
@@ -411,47 +502,40 @@ nameserver 1.0.0.1
 
 ### SSH (Secure Shell)
 
-a protocol used to securely connect to another computer over a network and execute commands.
+A protocol used to securely connect to another computer over a network and execute commands.
 
 ```jsx
 //installing ssh service
-sudo apt-get update
-sudo apt-get install openssh-server
+$ sudo apt-get update
+$ sudo apt-get install openssh-server
 
 //starting the service
-sudo systemctl start ssh
+$ sudo systemctl start ssh
 
 //starting automaticallt every time of boots
-sudo systemctl enable ssh
+$ sudo systemctl enable ssh
 
 //connecting with a remote server with ssh
-ssh user@ip_address
-ssh root@192.168.1.100
-```
+formate: ssh user@ip_address
+$ ssh root@192.168.1.10
 
-### creating SSH key pair
+//you can connect without a password (and more securely) by using an SSH key pair
 
-you can connect without a password (and more securely) by using an SSH key pair. 
-
-```jsx
 //creating ssh key
-ssh-keygen
+$ ssh-keygen
 
 //you have to copy the generated public key to the remote server
-ssh-copy-id root@192.168.1.110
-```
+$ ssh-copy-id root@192.168.1.10
 
-### SSH config file
-
-location: /etc/ssh/sshd_config
-
-```jsx
-sudo nano /etc/ssh/sshd_config
+//ssh config file location: /etc/ssh/sshd_config
+$ sudo nano /etc/ssh/sshd_config
 
 //can edit port setting
 port 2222
 
 //after changing restart ssh service
-sudo systemctl restart ssh
+$ sudo systemctl restart ssh
 
 ```
+
+Thats are the essential things need to know to use and working with linux system. I showed the basic commands and technique for doing some basic task. Keep exploring.
