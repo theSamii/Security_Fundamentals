@@ -45,6 +45,8 @@ The Linux file system is hierarchically organized, starting with the root direct
 
 /usr: Secondary hierarchy for user data; contains most user programs and utilities.
 ```
+You can watch the video to understand the Linux system hierarchy standard in detail.
+[![Linux essentials - Filesystem Hierarchy Standard explained in Bangla | Cybersecurity | Brainsec](https://thumbs.video-to-markdown.com/fcc1bcc3.jpg)](https://youtu.be/31ngIkQVebM)
 
 ## 3. Linux command line
 
@@ -105,6 +107,8 @@ drwxr-x--- 2 root root	4096 Aug  1 06:25 apache2
 //changing directory
 $ cd /temp
 ```
+Here, you can wath the video to learn all the basic command needed for the navigation and basic command line usage.
+[![Linux essentials - daily basic commands for CLI explained in Bangla | Cybersecurity | Brainsec](https://thumbs.video-to-markdown.com/7446bfb7.jpg)](https://youtu.be/rJMPrsgm3hM)
 
 ## 5. Finding files
 
@@ -170,6 +174,8 @@ $ wc -l /etc/passwd
 // -m: Displays only the number of characters (useful for multi-byte character sets)
 
 ```
+In this video, I showed filtering, manipulating and editing the file contents practically.
+[![Linux essentials - File manipulating, editing, filtering in Bangla | Cybersecurity | Brainsec](https://thumbs.video-to-markdown.com/ee3fdff6.jpg)](https://youtu.be/BkZJMshNmG4)
 
 ## 7. package management
 
@@ -214,6 +220,8 @@ $ sudo apt purge nmap
 $ sudo apt autoremove
 $ sudo apt autoclean
 ```
+You can watch the video where I showed the service and package management practically.
+[![Linux essentials - Service & Package management explained in Bangla | Cybersecurity | Brainsec](https://thumbs.video-to-markdown.com/d31526c7.jpg)](https://youtu.be/pvqTwpXWVBU)
 
 ## 8. User management
 
@@ -537,5 +545,7 @@ port 2222
 $ sudo systemctl restart ssh
 
 ```
+In a part this video, I showed how we can use ssh practically. Check it out.
+[![Linux essentials - Service & Package management explained in Bangla | Cybersecurity | Brainsec](https://thumbs.video-to-markdown.com/d31526c7.jpg)](https://youtu.be/pvqTwpXWVBU)
 
 Thats are the essential things need to know to use and working with linux system. I showed the basic commands and technique for doing some basic task. Keep exploring.
