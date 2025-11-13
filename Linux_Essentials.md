@@ -6,7 +6,7 @@
 
 Here, I showed the simple architecture of linux system.
 
-![My Screenshot](https://github.com/sami-tarif/Screenshots/blob/main/Linux_Essentials/Linux_architecture.png)
+![Linux Architecture](https://github.com/theSamii/Screenshots/blob/main/Linux_Essentials/Linux_architecture.png)
 
 ### Hardware
 
